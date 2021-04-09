@@ -1,0 +1,12 @@
+SELECT 
+  deviceId,
+  configurations,
+  properties.reported.Settings.DeviceHealthTelemetryConfiguration.value AS TelLevel_Desired,
+  properties.reported.Settings.DeviceHealthTelemetryConfiguration.value AS TelLevel_Actual,
+  properties.desired.CommandRunner.CommandArguments AS Command_Desired,
+  properties.reported.CommandRunner.CommandStatus AS Command_Result
+FROM devices.modules
+WHERE
+  moduleId = 'osconfig'
+  AND properties.reported.Settings.DeviceHealthTelemetryConfiguration.value = 2
+  AND configurations.general_devices.status = 'Applied'

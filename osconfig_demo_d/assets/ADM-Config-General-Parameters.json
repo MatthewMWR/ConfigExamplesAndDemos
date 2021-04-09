@@ -1,0 +1,25 @@
+{
+    "content": {
+      "moduleContent": {
+        "properties.desired.CommandRunner": {
+          "CommandArguments": {
+            "Action": 3,
+            "Arguments": "timedatectl set-timezone UTC ; timedatectl | grep zone | tr -d ' '",
+            "CommandId": "set_timezone"
+          },
+          "__t": "c"
+        },
+        "properties.desired.Settings": {
+          "DeviceHealthTelemetryConfiguration": 2
+        }
+      }
+    },
+    "id": "general_devices",
+    "priority": 50,
+    "targetCondition": "from devices.modules where moduleId='osconfig' and tags.country='DONT_MATCH_PLEASE'",
+    "metrics": {
+      "queries": {
+          "Completed": "SELECT deviceId, moduleId  FROM devices.modules WHERE moduleId='osconfig' AND properties.desired.Settings.DeviceHealthTelemetryConfiguration = 2 AND properties.reported.Settings.DeviceHealthTelemetryConfiguration.value = 2 AND configurations.[[general_devices]].status = 'Applied'"
+      }
+    }
+  }
