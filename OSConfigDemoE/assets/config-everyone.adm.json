@@ -1,0 +1,26 @@
+{
+    "id": "config-everyone",
+    "content": {
+        "moduleContent": {
+            "properties.desired.Settings": {
+                "__t": "c",
+                "DeviceHealthTelemetryConfiguration": 2
+            },
+            "properties.desired.CommandRunner": {
+                "__t": "c",
+                "CommandArguments": {
+                "CommandId": "my_config_07", "Action":3, "Arguments":"timedatectl set-timezone UTC ; timedatectl | grep zone | tr -d ' '"
+                }
+            }
+        }
+    },
+    "targetCondition": "from devices.modules where moduleId='osconfig'",
+    "priority": 50,
+    "metrics": {
+        "results": {},
+        "queries": {
+            "compliantCount": "select deviceId, properties.desired.Settings.DeviceHealthTelemetryConfiguration from devices.modules where configurations.[[config-everyone]].status = 'Applied' AND properties.reported.Settings.DeviceHealthTelemetryConfiguration.value = 2",
+            "detailedStatus": "select deviceId AS --DEVICE--, connectionState as -CONNECTED-, tags.country AS -COUNTRY-, properties.desired.Settings.DeviceHealthTelemetryConfiguration AS TelLevel_Desired, properties.reported.Settings.DeviceHealthTelemetryConfiguration.value AS TelLevel_Reported, properties.desired.CommandRunner.CommandArguments.Arguments AS Cmd_Desired, properties.reported.CommandRunner.CommandStatus.TextResult as Cmd_OutputReported from devices.modules where configurations.[[config-everyone]].status = 'Applied'" 
+        }
+    }
+}
