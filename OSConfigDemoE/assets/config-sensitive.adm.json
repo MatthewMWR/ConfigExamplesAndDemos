@@ -14,7 +14,7 @@
             }
         }
     },
-    "targetCondition": "from devices.modules where moduleId='osconfig' AND tags.country = 'DE'",
+    "targetCondition": "from devices.modules where moduleId='osconfig' AND tags.country = 'NONE'",
     "priority": 90,
     "metrics": {
         "results": {},

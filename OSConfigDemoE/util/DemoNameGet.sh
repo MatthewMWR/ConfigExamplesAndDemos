@@ -1,3 +1,3 @@
 #!/bin/bash
 
-cat ___DemoParameters.json  | jq -r .DemoName
+cat ___DemoParameters.json | jq -r .DemoName

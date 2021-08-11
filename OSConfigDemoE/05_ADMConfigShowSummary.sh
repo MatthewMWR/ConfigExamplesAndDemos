@@ -1,6 +1,6 @@
 #!/bin/bash
 
-DEMO_NAME=$(cat util/DemoNameGet.sh )
+DEMO_NAME=$(util/DemoNameGet.sh)
 CONFIG_METRIC="detailedStatus"
 STYLE_STRONG="\033[1;92m"
 STYLE_RESET="\033[0m"
@@ -18,7 +18,7 @@ echo -e "$TITLE"
 
 for CONFIG_NAME in `az iot hub configuration list -n $DEMO_NAME --query [].id --output tsv | sort`
 do
-  CONFIG_STATUS_DATA=$(util/ADMJobGetStatus.sh $DEMO_NAME $CONFIG_NAME $CONFIG_METRIC)
+  CONFIG_STATUS_DATA=$(util/ADMConfigGetStatus.sh $DEMO_NAME $CONFIG_NAME $CONFIG_METRIC)
   ITEM_COUNT=$(echo $CONFIG_STATUS_DATA | jq '. | length')
   CONFIG_BANNER="
 --------------------------------------
