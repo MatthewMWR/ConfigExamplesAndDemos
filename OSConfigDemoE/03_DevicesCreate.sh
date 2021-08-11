@@ -21,7 +21,7 @@ do
   az iot hub device-identity connection-string show -n $DEMO_NAME -d $DEVICE_NAME --query connectionString | tr -d \" > /var/tmp/DeviceConnectionString.txt
   lxc launch OSConfigBase01 $DEVICE_NAME
   sleep 1s
-  lxc file push var/tmp/DeviceConnectionString.txt $DEVICE_NAME/var/tmp/
+  lxc file push /var/tmp/DeviceConnectionString.txt $DEVICE_NAME/var/tmp/
   lxc file push assets/DeviceSetupInside-B.sh $DEVICE_NAME/var/tmp/
   sleep 2s
   lxc exec $DEVICE_NAME -- /var/tmp/DeviceSetupInside-B.sh
