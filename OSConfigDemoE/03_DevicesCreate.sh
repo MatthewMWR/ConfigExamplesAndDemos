@@ -1,6 +1,10 @@
 #!/bin/bash
 
-util/ContextCheck.sh
+if [ "$4" != "-y" ]
+then
+  util/ContextCheck.sh
+fi
+
 DEMO_NAME=$(util/DemoNameGet.sh)
 
 START_AT=$1
@@ -23,8 +27,7 @@ do
   sleep 1s
   lxc file push /var/tmp/DeviceConnectionString.txt $DEVICE_NAME/var/tmp/
   lxc file push assets/DeviceSetupInside-B.sh $DEVICE_NAME/var/tmp/
-  sleep 2s
-  lxc exec $DEVICE_NAME -- /var/tmp/DeviceSetupInside-B.sh
+  lxc exec $DEVICE_NAME -n -T -- /var/tmp/DeviceSetupInside-B.sh
   az iot hub module-twin update --device-id $DEVICE_NAME --hub-name $DEMO_NAME --module-id "osconfig" --tags "{\"country\": \"$LOCATION\"}"
   sleep $DELAY_SECONDS
 done

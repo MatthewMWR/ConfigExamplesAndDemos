@@ -3,6 +3,9 @@
 cd /var/tmp
 touch DeviceSetupInsideBreadCrumb-B.txt 
 
+## Experience has shown the container needs a few seconds to settle in
+## FUTURE: Figure out how to test and wait for dependencies explicitly
+## rather than sleep + hope
 sleep 5s
 
 CONN_STRING=$(cat DeviceConnectionString.txt)

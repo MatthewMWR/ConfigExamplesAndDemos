@@ -1,12 +1,12 @@
 #!/bin/bash
 
-DEMO_NAME=$(util/DemoNameGet.sh)
+DEMO_NAME=$1
 CONFIG_METRIC="detailedStatus"
 STYLE_STRONG="\033[1;92m"
 STYLE_RESET="\033[0m"
 STYLE_WEAK="\033[90m"
 TITLE="
-----------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------
 |$STYLE_STRONG Automatic Device Management$STYLE_RESET$STYLE_WEAK: $DEMO_NAME | $(date) $STYLE_RESET
 "
 
