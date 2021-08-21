@@ -4,6 +4,9 @@
 az --version
 az extension add --name azure-iot
 
+sudo apt install -y jq
+sudo apt install -y csvkit
+
 sudo snap install lxd
 lxc --version
 

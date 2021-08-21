@@ -5,14 +5,15 @@ CONFIG_METRIC="detailedStatus"
 STYLE_STRONG="\033[1;92m"
 STYLE_RESET="\033[0m"
 STYLE_WEAK="\033[90m"
-TITLE="
-----------------------------------------------------------------------
-|$STYLE_STRONG Automatic Device Management$STYLE_RESET$STYLE_WEAK: $DEMO_NAME | $(date) $STYLE_RESET
-"
 
 function jsonArrayToTable(){
     jq -r '(.[0] | ([keys[] | .] |(., map(length*"-")))), (.[] | ([keys[] as $k | .[$k] | tostring | .[0:24] ])) | @tsv' | column -t -s $'\t' -n -c 100
 }
+
+TITLE="
+----------------------------------------------------------------------
+|$STYLE_STRONG Automatic Device Management$STYLE_RESET$STYLE_WEAK: $DEMO_NAME | $(date) $STYLE_RESET"
+
 
 echo -e "$TITLE"
 
