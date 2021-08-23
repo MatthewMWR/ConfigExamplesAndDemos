@@ -17,5 +17,6 @@ echo -e "$TITLE"
 echo ""
 
 az iot hub query -n $DEMO_NAME -q "$IOTHUB_QUERY" \
+| util/Bug35118796Workaround.sh \
 | util/Json2Table.sh "$TABLE_COLUMNNAMES" $TABLE_COLUMNVALUEMAXLENGTH \
 | awk '{ print "  " $0 }'
