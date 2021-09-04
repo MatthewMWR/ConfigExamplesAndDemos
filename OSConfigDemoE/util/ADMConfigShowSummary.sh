@@ -12,7 +12,7 @@ function jsonArrayToTable(){
 
 TITLE="
 ----------------------------------------------------------------------
-|$STYLE_STRONG Automatic Device Management$STYLE_RESET$STYLE_WEAK: $DEMO_NAME | $(date) $STYLE_RESET"
+|$STYLE_STRONG Device Management$STYLE_RESET$STYLE_WEAK:  $DEMO_NAME:  $(date) $STYLE_RESET"
 
 
 echo -e "$TITLE"

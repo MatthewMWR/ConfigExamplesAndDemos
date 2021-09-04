@@ -1,5 +1,5 @@
 {
-    "id": "config-sensitive",
+    "id": "osconfig-sensitive",
     "content": {
         "moduleContent": {
             "properties.desired.Settings": {
@@ -14,13 +14,13 @@
             }
         }
     },
-    "targetCondition": "from devices.modules where moduleId='osconfig' AND tags.country = 'NONE'",
+    "targetCondition": "from devices.modules where moduleId='osconfig' AND tags.country = 'DE'",
     "priority": 90,
     "metrics": {
         "results": {},
         "queries": {
             "compliantCount": "select deviceId, properties.desired.Settings.DeviceHealthTelemetryConfiguration from devices.modules where configurations.[[config-sensitive]].status = 'Applied' AND properties.reported.Settings.DeviceHealthTelemetryConfiguration.value = 0",
-            "detailedStatus": "select deviceId AS --DEVICE--, connectionState as -CONNECTED-, tags.country AS -COUNTRY-, properties.desired.Settings.DeviceHealthTelemetryConfiguration AS TelLevel_Desired, properties.reported.Settings.DeviceHealthTelemetryConfiguration.value AS TelLevel_Reported, properties.desired.CommandRunner.CommandArguments.Arguments AS Cmd_Desired, properties.reported.CommandRunner.CommandStatus.TextResult as Cmd_OutputReported from devices.modules where configurations.[[config-sensitive]].status = 'Applied'" 
+            "detailedStatus": "select deviceId AS --DEVICE--, connectionState as -CONNECTED-, tags.country AS -COUNTRY-, properties.desired.Settings.DeviceHealthTelemetryConfiguration AS ADHSLevel_Desired, properties.reported.Settings.DeviceHealthTelemetryConfiguration.value AS ADHSLevel_Reported, properties.desired.CommandRunner.CommandArguments.Arguments AS Cmd_Desired, properties.reported.CommandRunner.CommandStatus.TextResult as Cmd_OutputReported from devices.modules where configurations.[[config-sensitive]].status = 'Applied'" 
         }
     }
 }

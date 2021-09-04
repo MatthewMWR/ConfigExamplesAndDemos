@@ -21,3 +21,9 @@ sudo apt-get -y install aziot-identity-service
 sudo apt-get -y install osconfig
 
 sudo systemctl stop osconfig
+
+#sudo apt-get -y --no-install-recommends install python3-pip
+#sudo apt-get -y --no-install-recommends install python3-wheel
+#sudo apt-get -y --no-install-recommends install python3-setuptools
+#sudo pip3 install wheel
+#sudo pip3 install azure-iot-device

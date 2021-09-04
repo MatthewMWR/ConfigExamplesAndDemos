@@ -1,0 +1,14 @@
+{
+    "id": "config-thermostat",
+    "content": {
+        "deviceContent": {
+            "properties.desired.tempTarget": 200
+        }
+    },
+    "targetCondition": "properties.reported.tempTarget!=null",
+    "priority": 10,
+    "metrics": {
+        "results": {},
+        "queries": {}
+    }
+}

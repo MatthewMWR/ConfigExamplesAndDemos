@@ -26,8 +26,11 @@ do
   lxc launch OSConfigBase01 $DEVICE_NAME
   sleep 1s
   lxc file push /var/tmp/DeviceConnectionString.txt $DEVICE_NAME/var/tmp/
+  lxc file push assets/MySimpleThermo2.py $DEVICE_NAME/var/tmp/
   lxc file push assets/DeviceSetupInside-B.sh $DEVICE_NAME/var/tmp/
+
   lxc exec $DEVICE_NAME -n -T -- /var/tmp/DeviceSetupInside-B.sh
   az iot hub module-twin update --device-id $DEVICE_NAME --hub-name $DEMO_NAME --module-id "osconfig" --tags "{\"country\": \"$LOCATION\"}"
+  lxc exec $DEVICE_NAME -n -T -- python3 /var/tmp/MySimpleThermo2.py &
   sleep $DELAY_SECONDS
 done
