@@ -5,14 +5,35 @@
 ## For real devices and scenarios you should choose stronger authentication
 ## mechanisms, such as hardware protected device secrets.
 
-resourceGroupName="QuickStart-OSConfig-Fleet"
+if [ -z "$1" ]
+then
+    uniquifier=$(od --address-radix=n -N2 -i /dev/random | tr -d [:space:])
+    demoUniqueLabel="QuickStart-$uniquifier"
+else
+    demoUniqueLabel=$1
+fi
+
+echo "##"
+echo "## Starting lab setup"
+echo "## Your resource group and IoT Hub will be named:"
+echo "## $demoUniqueLabel"
+echo "##"
+
+resourceGroupName="$demoUniqueLabel"
 location="westus2"
-iotHubName="$resourceGroupName"
+iotHubName="$demoUniqueLabel"
 startAtDeviceNumber=1
 endAfterDeviceNumber=2
 
-az group create --name "$resourceGroupName" --location "$location"
-az iot hub create --resource-group "$resourceGroupName" --name "$iotHubName"
+echo ""
+echo "## Creating resource group"
+echo ""
+az group create --name "$resourceGroupName" --location "$location" --query id
+
+echo ""
+echo "## Creating IoT Hub (this can take a few minutes)"
+echo ""
+az iot hub create --resource-group "$resourceGroupName" --name "$iotHubName" --query id
 
 vmInitScriptTemplate='#!/bin/sh
 demo_connection_string=DEMO_CONNECTION_STRING_PLACEHOLDER
@@ -44,10 +65,23 @@ mkdir ./temp
 for i in `seq $startAtDeviceNumber $endAfterDeviceNumber`
 do
     deviceName=$(printf "device%02d" $i)
-    az iot hub device-identity create --hub-name "$iotHubName" --device-id "$deviceName"
+    pathToDeviceInitScript="./temp/$deviceName.sh"
+    echo ""
+    echo "## Creating IoT Hub devide identity: $deviceName"
+    echo ""
+    az iot hub device-identity create --hub-name "$iotHubName" --device-id "$deviceName" --query status
     connectionString=$(az iot hub device-identity connection-string show --device-id "$deviceName" --hub-name "$iotHubName" --query connectionString)
-    echo "$vmInitScriptTemplate" > ./temp/$deviceName.sh
-    sed -i "s|DEMO_CONNECTION_STRING_PLACEHOLDER|$connectionString|" ./temp/$deviceName.sh
-    az vm create --resource-group "$resourceGroupName" --name "$deviceName" --size Standard_B1s --image "canonical:0001-com-ubuntu-server-focal:20_04-lts-gen2:latest" --generate-ssh-keys --user-data "./temp/$deviceName.sh" --public-ip-sku Standard --admin-username "azureuser" --no-wait
+    echo "$vmInitScriptTemplate" > $pathToDeviceInitScript
+    sed -i "s|DEMO_CONNECTION_STRING_PLACEHOLDER|$connectionString|" $pathToDeviceInitScript
+    echo ""
+    echo "## creating VM to act as virtual device: $deviceName"
+    echo ""
+    az vm create --resource-group "$resourceGroupName" --name "$deviceName" --size Standard_B1s --image "canonical:0001-com-ubuntu-server-focal:20_04-lts-gen2:latest" --generate-ssh-keys --user-data $pathToDeviceInitScript --public-ip-sku Standard --admin-username "azureuser" --no-wait
+    sleep 2
     rm ./temp/$deviceName.sh
 done
+
+echo "## Lab setup script concluded"
+echo "## Your resource group and IoT Hub are named:"
+echo "## $demoUniqueLabel"
+echo ""
