@@ -1,0 +1,28 @@
+{
+    "id": "osconfig_everyone",
+    "labels": {
+        "displayName": "General devices"
+    },
+    "content": {
+        "moduleContent": {
+            "properties.desired.Settings": {
+                "__t": "c",
+                "DeviceHealthTelemetryConfiguration": 2
+            },
+            "properties.desired.CommandRunner": {
+                "__t": "c",
+                "CommandArguments": {
+                "CommandId": "my_tz_config", "Action":3, "Arguments":"timedatectl set-timezone UTC ; timedatectl | grep zone | tr -d ' '"
+                }
+            }
+        }
+    },
+    "targetCondition": "from devices.modules where moduleId='osconfig' AND tags.country != 'DE'",
+    "priority": 5,
+    "metrics": {
+        "results": {},
+        "queries": {
+            "compliant": "select deviceId, moduleId from devices.modules where configurations.[[osconfig_everyone]].status = 'Applied' AND properties.reported.Settings.DeviceHealthTelemetryConfiguration.value = 2 AND properties.reported.CommandRunner.CommandStatus.TextResult = 'Timezone:UTC(UTC,+0000) '"
+        }
+    }
+}

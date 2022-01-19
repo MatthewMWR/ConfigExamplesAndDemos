@@ -1,10 +1,7 @@
 #!/bin/bash
 
-DISPLAY_COLUMNS=$1
-
-DISPLAY_MAXCOLUMNWIDTH=$2
+DISPLAY_MAXCOLUMNWIDTH=$1
 
 cat - \
-| in2csv -f json \
-| csvcut -c "$DISPLAY_COLUMNS" \
+| in2csv -f json -u 1 \
 | csvlook --max-column-width "$DISPLAY_MAXCOLUMNWIDTH"

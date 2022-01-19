@@ -6,7 +6,7 @@ conn_str_file = open("/var/tmp/DeviceConnectionString.txt", "r")
 conn_str = conn_str_file.read()
 conn_str_file.close()
 
-temp_target = random.randint(150, 210)
+temp_target = random.randint(101, 200)
 
 # define behavior for receiving a twin patch
 def twin_patch_handler(patch):
@@ -22,7 +22,7 @@ device_client.connect()
 while True:
     # send new reported properties
     reported_properties = {
-        "tempLatest": random.randint(temp_target - 7, temp_target + 7),
+        "tempLatest": random.randint(temp_target - 2, temp_target + 2),
         "tempTarget": temp_target
         }
     device_client.patch_twin_reported_properties(reported_properties)

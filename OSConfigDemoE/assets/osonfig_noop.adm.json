@@ -1,0 +1,20 @@
+{
+    "id": "__ignore_osconfig_noop",
+    "labels": {
+        "displayName": "Devices"
+    },
+    "content": {
+        "moduleContent": {
+            "properties.desired.Settings": {
+                "__t": "c",
+                "DeviceHealthTelemetryConfiguration": null
+            }
+        }
+    },
+    "targetCondition": "from devices.modules where moduleId='osconfig'",
+    "priority": 1,
+    "metrics": {
+        "results": {},
+        "queries": {}
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "id": "temp_mgmt",
+    "labels": {
+        "displayName": "Devices targeted for tempTarget"
+    },
+    "content": {
+        "deviceContent": {
+            "properties.desired.foo": null,
+            "properties.desired.tempTarget": 200
+        }
+    },
+    "targetCondition": "properties.reported.tempTarget!=null",
+    "priority": 5,
+    "metrics": {
+        "results": {},
+        "queries": {}
+    }
+}

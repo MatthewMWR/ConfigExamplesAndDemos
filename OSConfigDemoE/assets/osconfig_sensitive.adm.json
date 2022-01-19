@@ -1,0 +1,28 @@
+{
+    "id": "osconfig_sensitive",
+    "labels": {
+        "displayName": "Sensitive devices"
+    },
+    "content": {
+        "moduleContent": {
+            "properties.desired.Settings": {
+                "__t": "c",
+                "DeviceHealthTelemetryConfiguration": 0
+            },
+            "properties.desired.CommandRunner": {
+                "__t": "c",
+                "CommandArguments": {
+                "CommandId": "my_tz_config", "Action":3, "Arguments":"timedatectl set-timezone UTC ; timedatectl | grep zone | tr -d ' '"
+                }
+            }
+        }
+    },
+    "targetCondition": "from devices.modules where moduleId='osconfig' AND tags.country = 'DE'",
+    "priority": 8,
+    "metrics": {
+        "results": {},
+        "queries": {
+            "compliant": "select deviceId, moduleId from devices.modules where configurations.[[osconfig_sensitive]].status = 'Applied' AND properties.reported.Settings.DeviceHealthTelemetryConfiguration.value = 0 AND properties.reported.CommandRunner.CommandStatus.TextResult = 'Timezone:UTC(UTC,+0000) '"
+        }
+    }
+}

@@ -13,7 +13,5 @@ CONFIG_METRIC=$3
 ##--query result
 
 CONFIG_JSON=$(az iot hub configuration show --config-id $CONFIG_NAME -n $DEMO_NAME)
-
 QUERY=$(echo $CONFIG_JSON | jq -r .metrics.queries.detailedStatus)
-
 az iot hub query -n $DEMO_NAME -q "$QUERY"

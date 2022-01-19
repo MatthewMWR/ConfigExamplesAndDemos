@@ -7,6 +7,8 @@ fi
 
 DEMO_NAME=$(util/DemoNameGet.sh)
 
+IMAGE_NAME="OSConfigBase05"
+
 START_AT=$1
 END_AFTER=$2
 DELAY_SECONDS=$3
@@ -23,7 +25,7 @@ do
   ## by making this connection string file name device instance specific
   ## or using some other mechanism to pass the connection string to the device
   az iot hub device-identity connection-string show -n $DEMO_NAME -d $DEVICE_NAME --query connectionString | tr -d \" > /var/tmp/DeviceConnectionString.txt
-  lxc launch OSConfigBase01 $DEVICE_NAME
+  lxc launch "$IMAGE_NAME" $DEVICE_NAME
   sleep 1s
   lxc file push /var/tmp/DeviceConnectionString.txt $DEVICE_NAME/var/tmp/
   lxc file push assets/MySimpleThermo2.py $DEVICE_NAME/var/tmp/

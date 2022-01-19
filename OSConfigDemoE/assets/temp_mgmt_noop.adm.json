@@ -1,12 +1,15 @@
 {
-    "id": "config-thermostat",
+    "id": "__ignore_temp_mgmt_noop",
+    "labels": {
+        "displayName": "Devices"
+    },
     "content": {
         "deviceContent": {
-            "properties.desired.tempTarget": 200
+            "properties.desired.foo": null
         }
     },
     "targetCondition": "properties.reported.tempTarget!=null",
-    "priority": 10,
+    "priority": 1,
     "metrics": {
         "results": {},
         "queries": {}

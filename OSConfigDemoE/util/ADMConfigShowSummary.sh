@@ -17,9 +17,10 @@ TITLE="
 
 echo -e "$TITLE"
 
-for CONFIG_NAME in `az iot hub configuration list -n $DEMO_NAME --query [].id --output tsv | sort`
+for CONFIG_NAME in `az iot hub configuration list -n $DEMO_NAME --query [].id --output tsv | sort | grep osconfig`
 do
   CONFIG_STATUS_DATA=$(util/ADMConfigGetStatus.sh $DEMO_NAME $CONFIG_NAME $CONFIG_METRIC)
+  #echo "$CONFIG_STATUS_DATA"
   ITEM_COUNT=$(echo $CONFIG_STATUS_DATA | jq '. | length')
   CONFIG_BANNER="
 --------------------------------------

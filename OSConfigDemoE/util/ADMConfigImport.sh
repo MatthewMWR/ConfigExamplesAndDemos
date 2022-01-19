@@ -13,4 +13,5 @@ az iot hub configuration create \
 --content "$(echo $JOBJSON | jq .content)" \
 --target-condition "$(echo $JOBJSON | jq -r .targetCondition)" \
 --priority "$(echo $JOBJSON | jq -r .priority)" \
---metrics "$(echo $JOBJSON | jq -r .metrics)"
+--metrics "$(echo $JOBJSON | jq -r .metrics)" \
+--labels "$(echo $JOBJSON | jq -r .labels)"
