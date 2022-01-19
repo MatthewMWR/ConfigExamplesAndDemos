@@ -39,6 +39,8 @@ sleep 5
 sudo systemctl restart osconfig
 '
 
+mkdir ./temp
+
 for i in `seq $startAtDeviceNumber $endAfterDeviceNumber`
 do
     deviceName=$(printf "device%02d" $i)
