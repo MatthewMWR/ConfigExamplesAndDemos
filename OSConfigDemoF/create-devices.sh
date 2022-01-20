@@ -7,7 +7,7 @@
 
 if [ -z "$1" ]
 then
-    uniquifier=$(od --address-radix=n -N2 -i /dev/random | tr -d [:space:])
+    uniquifier=$(od --address-radix=n -N2 -i /dev/random | tr -d "[:space:]")
     demoUniqueLabel="QuickStart-$uniquifier"
 else
     demoUniqueLabel=$1
@@ -25,15 +25,18 @@ iotHubName="$demoUniqueLabel"
 startAtDeviceNumber=1
 endAfterDeviceNumber=2
 
+tenantId=$(az account show --query tenantId --output tsv)
+
 echo ""
-echo "## Creating resource group"
+echo "## Creating resource group. The id will appear below for reference."
 echo ""
 az group create --name "$resourceGroupName" --location "$location" --query id
 
 echo ""
-echo "## Creating IoT Hub (this can take a few minutes)"
+echo "## Creating IoT Hub (this can take a few minutes), the id will be shown below"
 echo ""
-az iot hub create --resource-group "$resourceGroupName" --name "$iotHubName" --query id
+iotHubId=$(az iot hub create --resource-group "$resourceGroupName" --name "$iotHubName" --query id --output tsv)
+echo "$iotHubId"
 
 vmInitScriptTemplate='#!/bin/sh
 demo_connection_string=DEMO_CONNECTION_STRING_PLACEHOLDER
@@ -66,26 +69,33 @@ sudo systemctl restart osconfig
 
 mkdir ./temp
 
-for i in `seq $startAtDeviceNumber $endAfterDeviceNumber`
+for i in $(seq $startAtDeviceNumber $endAfterDeviceNumber)
 do
-    deviceName=$(printf "device%02d" $i)
+    deviceName=$(printf "device%02d" "$i")
     pathToDeviceInitScript="./temp/$deviceName.sh"
     echo ""
     echo "## Creating IoT Hub devide identity: $deviceName"
     echo ""
     az iot hub device-identity create --hub-name "$iotHubName" --device-id "$deviceName" --query status
     connectionString=$(az iot hub device-identity connection-string show --device-id "$deviceName" --hub-name "$iotHubName" --query connectionString)
-    echo "$vmInitScriptTemplate" > $pathToDeviceInitScript
-    sed -i "s|DEMO_CONNECTION_STRING_PLACEHOLDER|$connectionString|" $pathToDeviceInitScript
+    echo "$vmInitScriptTemplate" > "$pathToDeviceInitScript"
+    sed -i "s|DEMO_CONNECTION_STRING_PLACEHOLDER|$connectionString|" "$pathToDeviceInitScript"
     echo ""
     echo "## creating VM to act as virtual device: $deviceName"
     echo ""
-    az vm create --resource-group "$resourceGroupName" --name "$deviceName" --size Standard_B1s --image "canonical:0001-com-ubuntu-server-focal:20_04-lts-gen2:latest" --generate-ssh-keys --user-data $pathToDeviceInitScript --public-ip-sku Standard --admin-username "azureuser" --no-wait
+    az vm create --resource-group "$resourceGroupName" --name "$deviceName" --size Standard_B1s --image "canonical:0001-com-ubuntu-server-focal:20_04-lts-gen2:latest" --generate-ssh-keys --user-data "$pathToDeviceInitScript" --public-ip-sku Standard --admin-username "azureuser" --no-wait
     sleep 2
-    rm $pathToDeviceInitScript
+    rm "$pathToDeviceInitScript"
 done
 
 echo "## Lab setup script concluded"
 echo "## Your resource group and IoT Hub are named:"
 echo "## $demoUniqueLabel"
 echo ""
+echo "## To see your IoT Hub in the portal, you can paste $demoUniqueLabel"
+echo "## into the portal search box, or you can try this direct link:"
+echo ""
+echo "https://portal.azure.com/#@$tenantId/resource$iotHubId"
+echo ""
+echo "## NOTE: You may need to modify the portal.azure.com portion of the link"
+echo "to suit the geographic or government Azure cloud you use."
