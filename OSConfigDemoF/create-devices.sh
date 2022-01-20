@@ -38,6 +38,10 @@ az iot hub create --resource-group "$resourceGroupName" --name "$iotHubName" --q
 vmInitScriptTemplate='#!/bin/sh
 demo_connection_string=DEMO_CONNECTION_STRING_PLACEHOLDER
 
+## simulate ADHS being installed by placing ADHS config file
+mkdir /etc/azure-device-health-services/
+echo "Permission = \"Optional\"" > /etc/azure-device-health-services/config.toml
+
 ## add prod and insiders channels from packages.microsoft.com to package manager
 os=$(cat /etc/os-release | grep ^ID= | tr -d "ID=")
 version=$(cat /etc/os-release | grep VERSION_ID | tr -d "VERSION_ID=" | tr -d \")
@@ -78,7 +82,7 @@ do
     echo ""
     az vm create --resource-group "$resourceGroupName" --name "$deviceName" --size Standard_B1s --image "canonical:0001-com-ubuntu-server-focal:20_04-lts-gen2:latest" --generate-ssh-keys --user-data $pathToDeviceInitScript --public-ip-sku Standard --admin-username "azureuser" --no-wait
     sleep 2
-    rm ./temp/$deviceName.sh
+    rm $pathToDeviceInitScript
 done
 
 echo "## Lab setup script concluded"
