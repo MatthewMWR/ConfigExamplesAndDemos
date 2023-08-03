@@ -1,0 +1,84 @@
+[2022-01-27 21:54:57] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/firewall.so returned 0x56229783ae30
+[2022-01-27 21:54:57] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/hostname.so returned 0x56229781a280
+[2022-01-27 21:54:57] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/tpm.so returned 0x5622977b4110
+[2022-01-27 21:54:57] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/ztsi.so returned 0x56229782a080
+[2022-01-28 05:01:48] [ModulesManager.cpp:104] MpiClose(0x562297746360)
+[2022-01-28 05:01:48] [ManagementModule.cpp:356] MmiClose(0x5622978137d0) to /usr/lib/osconfig/commandrunner.so
+[2022-01-28 05:01:48] [ManagementModule.cpp:356] MmiClose(0x56229783ae30) to /usr/lib/osconfig/firewall.so
+[2022-01-28 05:01:48] [ManagementModule.cpp:356] MmiClose(0x56229780e2f0) to /usr/lib/osconfig/networking.so
+[2022-01-28 05:01:48] [ManagementModule.cpp:356] MmiClose(0x5622977b4110) to /usr/lib/osconfig/tpm.so
+[2022-01-28 05:01:48] [ManagementModule.cpp:356] MmiClose(0x56229782a080) to /usr/lib/osconfig/ztsi.so
+[2022-01-28 05:01:48] [ManagementModule.cpp:356] MmiClose(0x56229781a280) to /usr/lib/osconfig/hostname.so
+[2022-02-08 18:13:08] [ModulesManager.cpp:254] Loading modules using modulePath: /usr/lib/osconfig
+[2022-02-08 18:13:08] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.0.20220122, -, 397) to /usr/lib/osconfig/networking.so returned 0
+[2022-02-08 18:13:08] [ModulesManager.cpp:307] Loaded Module: Networking, version: 1.0.0.0, location: /usr/lib/osconfig/networking.so, supported components: ["Networking"]
+[2022-02-08 18:13:08] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.0.20220122, -, 385) to /usr/lib/osconfig/tpm.so returned 0
+[2022-02-08 18:13:08] [ModulesManager.cpp:307] Loaded Module: Tpm, version: 1.0.0.0, location: /usr/lib/osconfig/tpm.so, supported components: ["Tpm"]
+[2022-02-08 18:13:08] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.0.20220122, -, 331) to /usr/lib/osconfig/firewall.so returned 0
+[2022-02-08 18:13:08] [ModulesManager.cpp:307] Loaded Module: Firewall, version: 2.0.0.0, location: /usr/lib/osconfig/firewall.so, supported components: ["Firewall"]
+[2022-02-08 18:13:08] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.0.20220122, -, 326) to /usr/lib/osconfig/ztsi.so returned 0
+[2022-02-08 18:13:08] [ModulesManager.cpp:307] Loaded Module: Ztsi, version: 1.0.0.0, location: /usr/lib/osconfig/ztsi.so, supported components: ["Ztsi"]
+[2022-02-08 18:13:08] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.0.20220122, -, 336) to /usr/lib/osconfig/commandrunner.so returned 0
+[2022-02-08 18:13:08] [ModulesManager.cpp:307] Loaded Module: CommandRunner, version: 2.0.0.0, location: /usr/lib/osconfig/commandrunner.so, supported components: ["CommandRunner"]
+[2022-02-08 18:13:08] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.0.20220122, -, 399) to /usr/lib/osconfig/settings.so returned 0
+[2022-02-08 18:13:08] [ModulesManager.cpp:307] Loaded Module: Settings, version: 0.1.0.0, location: /usr/lib/osconfig/settings.so, supported components: ["Settings"]
+[2022-02-08 18:13:08] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.0.20220122, -, 303) to /usr/lib/osconfig/hostname.so returned 0
+[2022-02-08 18:13:08] [ModulesManager.cpp:307] Loaded Module: HostName, version: 1.0.0.0, location: /usr/lib/osconfig/hostname.so, supported components: ["HostName"]
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object CommandStatus for component CommandRunner
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object NetworkConfiguration for component Networking
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object FirewallState for component Firewall
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object FirewallFingerprint for component Firewall
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object Name for component HostName
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object Hosts for component HostName
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object TpmStatus for component Tpm
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object TpmVersion for component Tpm
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object TpmManufacturer for component Tpm
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object Enabled for component Ztsi
+[2022-02-08 18:13:08] [ModulesManager.cpp:361] Found reported object ServiceUrl for component Ztsi
+[2022-02-08 18:13:08] [ModulesManager.cpp:59] MpiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) returned 0x56087e571360
+[2022-02-08 18:13:08] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/commandrunner.so returned 0x56087e63ea20
+[2022-02-08 18:13:08] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/networking.so returned 0x56087e6392d0
+[2022-02-08 18:13:08] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/firewall.so returned 0x56087e63f2d0
+[2022-02-08 18:13:08] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/hostname.so returned 0x56087e6578e0
+[2022-02-08 18:13:08] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/tpm.so returned 0x56087e66c0d0
+[2022-02-08 18:13:08] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.0.20220122, 4096) to /usr/lib/osconfig/ztsi.so returned 0x56087e652700
+[2022-02-08 19:21:29] [ModulesManager.cpp:104] MpiClose(0x56087e571360)
+[2022-02-08 19:21:29] [ManagementModule.cpp:356] MmiClose(0x56087e63ea20) to /usr/lib/osconfig/commandrunner.so
+[2022-02-08 19:21:29] [ManagementModule.cpp:356] MmiClose(0x56087e63f2d0) to /usr/lib/osconfig/firewall.so
+[2022-02-08 19:21:29] [ManagementModule.cpp:356] MmiClose(0x56087e6392d0) to /usr/lib/osconfig/networking.so
+[2022-02-08 19:21:29] [ManagementModule.cpp:356] MmiClose(0x56087e66c0d0) to /usr/lib/osconfig/tpm.so
+[2022-02-08 19:21:29] [ManagementModule.cpp:356] MmiClose(0x56087e652700) to /usr/lib/osconfig/ztsi.so
+[2022-02-08 19:21:29] [ManagementModule.cpp:356] MmiClose(0x56087e6578e0) to /usr/lib/osconfig/hostname.so
+[2022-02-08 19:21:29] [ModulesManager.cpp:264] Loading modules using modulePath: /usr/lib/osconfig
+[2022-02-08 19:21:29] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.1.20220208, -, 397) to /usr/lib/osconfig/networking.so returned 0
+[2022-02-08 19:21:29] [ModulesManager.cpp:317] Loaded Module: Networking, version: 1.0.0.0, location: /usr/lib/osconfig/networking.so, supported components: ["Networking"]
+[2022-02-08 19:21:29] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.1.20220208, -, 385) to /usr/lib/osconfig/tpm.so returned 0
+[2022-02-08 19:21:29] [ModulesManager.cpp:317] Loaded Module: Tpm, version: 1.0.0.0, location: /usr/lib/osconfig/tpm.so, supported components: ["Tpm"]
+[2022-02-08 19:21:29] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.1.20220208, -, 331) to /usr/lib/osconfig/firewall.so returned 0
+[2022-02-08 19:21:29] [ModulesManager.cpp:317] Loaded Module: Firewall, version: 2.0.0.0, location: /usr/lib/osconfig/firewall.so, supported components: ["Firewall"]
+[2022-02-08 19:21:29] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.1.20220208, -, 326) to /usr/lib/osconfig/ztsi.so returned 0
+[2022-02-08 19:21:29] [ModulesManager.cpp:317] Loaded Module: Ztsi, version: 1.0.0.0, location: /usr/lib/osconfig/ztsi.so, supported components: ["Ztsi"]
+[2022-02-08 19:21:29] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.1.20220208, -, 336) to /usr/lib/osconfig/commandrunner.so returned 0
+[2022-02-08 19:21:29] [ModulesManager.cpp:317] Loaded Module: CommandRunner, version: 2.0.0.0, location: /usr/lib/osconfig/commandrunner.so, supported components: ["CommandRunner"]
+[2022-02-08 19:21:29] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.1.20220208, -, 399) to /usr/lib/osconfig/settings.so returned 0
+[2022-02-08 19:21:29] [ModulesManager.cpp:317] Loaded Module: Settings, version: 0.1.0.0, location: /usr/lib/osconfig/settings.so, supported components: ["Settings"]
+[2022-02-08 19:21:29] [ManagementModule.cpp:76] MmiGetInfo(Azure OSConfig 5;1.0.1.20220208, -, 303) to /usr/lib/osconfig/hostname.so returned 0
+[2022-02-08 19:21:29] [ModulesManager.cpp:317] Loaded Module: HostName, version: 1.0.0.0, location: /usr/lib/osconfig/hostname.so, supported components: ["HostName"]
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object CommandStatus for component CommandRunner
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object NetworkConfiguration for component Networking
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object FirewallState for component Firewall
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object FirewallFingerprint for component Firewall
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object Name for component HostName
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object Hosts for component HostName
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object TpmStatus for component Tpm
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object TpmVersion for component Tpm
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object TpmManufacturer for component Tpm
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object Enabled for component Ztsi
+[2022-02-08 19:21:29] [ModulesManager.cpp:383] Found reported object ServiceUrl for component Ztsi
+[2022-02-08 19:21:29] [ModulesManager.cpp:54] MpiOpen(Azure OSConfig 5;1.0.1.20220208, 4096) returned 0x55df59ff4360
+[2022-02-08 19:21:29] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.1.20220208, 4096) to /usr/lib/osconfig/commandrunner.so returned 0x55df5a0c4460
+[2022-02-08 19:21:29] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.1.20220208, 4096) to /usr/lib/osconfig/networking.so returned 0x55df5a0bc430
+[2022-02-08 19:21:29] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.1.20220208, 4096) to /usr/lib/osconfig/firewall.so returned 0x55df5a0d6710
+[2022-02-08 19:21:29] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.1.20220208, 4096) to /usr/lib/osconfig/hostname.so returned 0x55df5a0bfbe0
+[2022-02-08 19:21:29] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.1.20220208, 4096) to /usr/lib/osconfig/tpm.so returned 0x55df5a0dc3d0
+[2022-02-08 19:21:29] [ManagementModule.cpp:397] MmiOpen(Azure OSConfig 5;1.0.1.20220208, 4096) to /usr/lib/osconfig/ztsi.so returned 0x55df5a0c1590

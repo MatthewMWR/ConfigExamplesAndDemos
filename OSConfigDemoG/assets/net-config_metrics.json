@@ -1,0 +1,9 @@
+ 
+{ 
+  "metrics": {
+      "queries": {
+          "complete": "SELECT deviceId FROM devices.modules WHERE moduleId='osconfig' AND configurations.[[net_config]].status='Applied' AND properties.reported.Firewall.desiredRules.ac=200 AND properties.reported.Firewall.configurationStatus='success' AND properties.reported.HostName.hosts=properties.desired.HostName.desiredHosts",
+          "not-complete": "SELECT deviceId FROM devices.modules WHERE moduleId='osconfig' AND configurations.[[net_config]].status='Applied' AND properties.reported.Firewall.desiredRules.ac!=200 OR properties.reported.Firewall.configurationStatus!='success' OR properties.reported.HostName.hosts!=properties.desired.HostName.desiredHosts"
+      }
+    }
+}

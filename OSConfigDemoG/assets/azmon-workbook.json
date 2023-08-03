@@ -1,0 +1,426 @@
+{
+  "version": "Notebook/1.0",
+  "items": [
+    {
+      "type": 1,
+      "content": {
+        "json": "# 🌐 CONTOSO Innovations, Inc.\n---"
+      },
+      "name": "title"
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "loadType": "always",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### 📈 Device inventory (aggregates)"
+            },
+            "name": "text - 10"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "OSConfigTwinsCurrent\n| summarize count() by tostring(properties.reported.DeviceInfo.osName)\n",
+              "size": 0,
+              "title": "OsName distribution",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "piechart",
+              "showExpandCollapseGrid": true,
+              "gridSettings": {
+                "sortBy": [
+                  {
+                    "itemKey": "deviceId",
+                    "sortOrder": 1
+                  }
+                ]
+              },
+              "sortBy": [
+                {
+                  "itemKey": "deviceId",
+                  "sortOrder": 1
+                }
+              ],
+              "graphSettings": {
+                "type": 0
+              },
+              "chartSettings": {
+                "showLegend": true
+              }
+            },
+            "customWidth": "25",
+            "name": "query - 2 - Copy - Copy - Copy - Copy"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "OSConfigTwinsCurrent\n| summarize count() by tostring(connectionState)\n",
+              "size": 0,
+              "title": "CloudConnected distribution",
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "piechart",
+              "showExpandCollapseGrid": true,
+              "gridSettings": {
+                "sortBy": [
+                  {
+                    "itemKey": "deviceId",
+                    "sortOrder": 1
+                  }
+                ]
+              },
+              "sortBy": [
+                {
+                  "itemKey": "deviceId",
+                  "sortOrder": 1
+                }
+              ],
+              "graphSettings": {
+                "type": 0
+              },
+              "chartSettings": {
+                "showLegend": true
+              }
+            },
+            "customWidth": "25",
+            "name": "query - 2 - Copy - Copy - Copy - Copy - Copy"
+          }
+        ]
+      },
+      "name": "Inventory (aggregates)",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### 📈 Device inventory \r\n- Examples of device properties which are always reported by OSConfig, independent of whether OSConfig is setting them\r\n- For use in reporting, diagnostics, auditing"
+            },
+            "name": "System inventory view"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "OSConfigTwinsCurrent\n| project deviceId, MemFreeMB = properties.reported.DeviceInfo.freeMemory / 1024,\nOsName = properties.reported.DeviceInfo.osName, OsVersion = properties.reported.DeviceInfo.osVersion, \nIpAddress_first = split(properties.reported.Networking.networkConfiguration.ipAddresses, \",\")[0],\nFirewallState=properties.reported.Firewall.state,\nCloudConnected = connectionState,\nDeviceDetail = properties.reported.DeviceInfo, NetworkDetail = properties.reported.Networking.networkConfiguration,\nAll = properties.reported",
+              "size": 2,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table",
+              "showExpandCollapseGrid": true
+            },
+            "name": "System inventory view grid"
+          }
+        ]
+      },
+      "name": "System inventory view group",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "loadType": "always",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### 📑 Configuration profiles"
+            },
+            "name": "text - 6 - Copy - Copy - Copy - Copy"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "HubConfigsCurrent\n| project _ = \"📃\", configId, targetCondition, appliedCount, completeCount, percentComplete = completeCount / appliedCount, notCompleteCount, dataFreshness\n",
+              "size": 1,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table",
+              "showExpandCollapseGrid": true,
+              "gridSettings": {
+                "formatters": [
+                  {
+                    "columnMatch": "percentComplete",
+                    "formatter": 4,
+                    "formatOptions": {
+                      "min": 0,
+                      "max": 1,
+                      "palette": "blue"
+                    },
+                    "numberFormat": {
+                      "unit": 0,
+                      "options": {
+                        "style": "percent"
+                      }
+                    }
+                  }
+                ]
+              },
+              "sortBy": []
+            },
+            "name": "query - 2 - Copy - Copy - Copy - Copy"
+          }
+        ]
+      },
+      "name": "view 5 group - Copy - Copy",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### 📈 Firewall and /etc/hosts desired state detail\r\n#### Device level detail for my firewall and /etc/hosts configurations (from configuration profiles net_config and net_config_gen2_sites)\r\n- Device level detail available for:\r\n  - Deeper confirmation of successful config \r\n  - Details for 1st level of troubleshooting if anything didn't apply\r\n- Zero touch\r\n- Confirming targeted configurations"
+            },
+            "name": "view 1 title"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "OSConfigTwinsCurrent\n| extend hostsFileLines = split( properties.reported.HostName.hosts, \";\")\n| extend hostsFileConfigStatus = iif(tostring(properties.reported.HostName.hosts) == tostring(properties.desired.HostName.desiredHosts), \"success\", \"no match\")\n| project _ = \"📊\", deviceId, siteName = tags.siteName, siteType=tostring(tags.siteType), hostsFileConfigStatus, hostsFileLastLine = tostring(hostsFileLines[-1]), firewallConfigStatus = properties.reported.Firewall.configurationStatus,\nfirewallState=properties.reported.Firewall.state, dataFreshness\n| order by siteType,deviceId",
+              "size": 2,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table",
+              "showExpandCollapseGrid": true
+            },
+            "name": "view 1 grid"
+          }
+        ]
+      },
+      "name": "view 1 group",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### 📈 Package manager configuration\r\n- Add and remove sources\r\n- Better together with Device Update for IoT Hub"
+            },
+            "name": "text - 6 - Copy - Copy - Copy - Copy"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "OSConfigTwinsCurrent\n| project deviceId,\npackageManagerConfigStatus = iif(properties.reported.PackageManagerConfiguration.state.executionState == 2, \"success\", \"error\"),\npackageSources = properties.reported.PackageManagerConfiguration.state.sourcesFilenames,\nconfigurations,\ndataFreshness",
+              "size": 2,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table",
+              "showExpandCollapseGrid": true
+            },
+            "name": "query - 2 - Copy - Copy - Copy - Copy"
+          }
+        ]
+      },
+      "name": "view 5 group",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### 📈 Custom config and reporting\r\n- Reboot example, with IoT Explorer\r\n- Custom reporting example with df"
+            },
+            "name": "view 4 title"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "OSConfigTwinsCurrent\n| project deviceId, CommandRequestId = properties.desired.CommandRunner.commandArguments.commandId, CommandArgs = properties.desired.CommandRunner.commandArguments.arguments, Output=properties.reported.CommandRunner.commandStatus.textResult, dataFreshness",
+              "size": 2,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table",
+              "showExpandCollapseGrid": true
+            },
+            "name": "view 4 grid"
+          }
+        ]
+      },
+      "name": "view 4 group",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "loadType": "always",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### Utility view: Devices readiness"
+            },
+            "name": "text - 6 - Copy - Copy - Copy - Copy"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "let right = OSConfigTwinsCurrent;\nDeviceTwinsCurrent | lookup right on deviceId\n| project deviceId, oscTwinModuleId = moduleId, oscConnectionState = connectionState1, dataFreshness,\n  tags, configurations\n",
+              "size": 2,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table",
+              "showExpandCollapseGrid": true,
+              "gridSettings": {
+                "sortBy": [
+                  {
+                    "itemKey": "deviceId",
+                    "sortOrder": 1
+                  }
+                ]
+              },
+              "sortBy": [
+                {
+                  "itemKey": "deviceId",
+                  "sortOrder": 1
+                }
+              ]
+            },
+            "name": "query - 2 - Copy - Copy - Copy - Copy"
+          }
+        ]
+      },
+      "name": "view 5 group - Copy",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    },
+    {
+      "type": 12,
+      "content": {
+        "version": "NotebookGroup/1.0",
+        "groupType": "editable",
+        "items": [
+          {
+            "type": 1,
+            "content": {
+              "json": "### 📈 View 2: Firewall and /etc/hosts settings from Configuration profile, part 2\r\n- Introduction to always-reported properties"
+            },
+            "name": "text - 6 - Copy"
+          },
+          {
+            "type": 3,
+            "content": {
+              "version": "KqlItem/1.0",
+              "query": "OSConfigTwinsCurrent\n| extend hostsFileLines = split( properties.reported.HostName.hosts, \";\")\n| project deviceId, siteName = tostring(tags.siteName), siteType = tostring(siteType=tags.siteType), connectionState, \nfirstIpAdress = split(properties.reported.Networking.networkConfiguration.ipAddresses, \",\")[0],\nhostsFileLines,\nfirewallState=properties.reported.Firewall.state, firewallFingerprint = properties.reported.Firewall.fingerprint, \ndataFreshness, configurations\n| order by siteType asc,siteName,deviceId",
+              "size": 2,
+              "timeContext": {
+                "durationMs": 86400000
+              },
+              "exportToExcelOptions": "all",
+              "queryType": 0,
+              "resourceType": "microsoft.operationalinsights/workspaces",
+              "visualization": "table",
+              "showExpandCollapseGrid": true
+            },
+            "name": "view 2 grid"
+          }
+        ]
+      },
+      "name": "view 2 group",
+      "styleSettings": {
+        "margin": "20px",
+        "padding": "20px",
+        "showBorder": true
+      }
+    }
+  ],
+  "fallbackResourceIds": [
+    "/subscriptions/54ea281d-e6f7-4e09-a315-8eba4de04b2d/resourceGroups/Util/providers/Microsoft.OperationalInsights/workspaces/scratch"
+  ],
+  "$schema": "https://github.com/Microsoft/Application-Insights-Workbooks/blob/master/schema/workbook.json"
+}

@@ -1,0 +1,8 @@
+{
+   "metrics": {
+      "queries": {
+         "complete": "select deviceId from devices.modules where moduleId='osconfig' AND properties.reported.PackageManagerConfiguration.state.executionState=2",
+         "not-complete": "select deviceId from devices.modules where moduleId='osconfig' AND properties.reported.PackageManagerConfiguration.state.executionState!=2"
+      }
+   }
+}

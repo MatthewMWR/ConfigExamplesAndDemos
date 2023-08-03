@@ -38,6 +38,7 @@ echo ""
 iotHubId=$(az iot hub create --resource-group "$resourceGroupName" --name "$iotHubName" --query id --output tsv)
 echo "$iotHubId"
 
+# shellcheck disable=SC2016
 vmInitScriptTemplate='#!/bin/sh
 demo_connection_string=DEMO_CONNECTION_STRING_PLACEHOLDER
 
@@ -49,22 +50,25 @@ echo "Permission = \"Optional\"" > /etc/azure-device-health-services/config.toml
 os=$(cat /etc/os-release | grep ^ID= | tr -d "ID=")
 version=$(cat /etc/os-release | grep VERSION_ID | tr -d "VERSION_ID=" | tr -d \")
 curl -sSL https://packages.microsoft.com/config/$os/$version/prod.list | sudo tee /etc/apt/sources.list.d/packages.microsoft.com_prod.list
-curl -sSL https://packages.microsoft.com/config/$os/$version/insiders-fast.list | sudo tee /etc/apt/sources.list.d/packages.microsoft.com_insiders-fast.list
+## Not using insider channel for now due to issue under investigation
+## curl -sSL https://packages.microsoft.com/config/$os/$version/insiders-fast.list | sudo tee /etc/apt/sources.list.d/packages.microsoft.com_insiders-fast.list
 curl -sSL https://packages.microsoft.com/keys/microsoft.asc | sudo tee /etc/apt/trusted.gpg.d/microsoft.asc
 sudo apt-get update
 
 ## Install AIS. Downloading from GitHub as workaround to 
 ## package not yet on packages.microsoft.com
-curl -L -O https://github.com/Azure/azure-iotedge/releases/download/1.2.5/aziot-identity-service_1.2.4-1_$os$version\_amd64.deb
-sudo apt install ./aziot-identity-service_1.2.4-1_$os$version\_amd64.deb
+#curl -L -O https://github.com/Azure/azure-iotedge/releases/download/1.2.5/aziot-identity-service_1.2.4-1_$os$version\_amd64.deb
+sudo apt install aziot-identity-service
 
 ## configure AIS
 sudo aziotctl config mp --connection-string "$demo_connection_string" --force
 sudo aziotctl config apply
 
-sudo apt-get -y install osconfig
+## Note, downloading directly rather than using insider-fast metadata due to issue under investigation
+curl -sSL -o osconfig-dev-channel.deb https://packages.microsoft.com/ubuntu/20.04/prod/pool/main/o/osconfig/osconfig_1.0.1.20220210_focal_x86_64.deb
+sudo apt-get -y install osconfig ./osconfig-dev-channel.deb
 sleep 5
-sudo systemctl restart osconfig
+#sudo systemctl restart osconfig
 '
 
 mkdir ./temp

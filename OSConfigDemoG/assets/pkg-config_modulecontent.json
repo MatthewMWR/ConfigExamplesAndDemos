@@ -1,0 +1,19 @@
+{
+   "moduleContent": {
+      "properties.desired.PackageManagerConfiguration": {
+         "desiredState": {
+            "gpgKeys": {
+               "pkgs-msft_key": "https://packages.microsoft.com/keys/microsoft.asc"
+            },
+            "sources": {
+               "pkgs-msft_insiders-fast": "deb [arch=amd64,armhf,arm64 signed-by=pkgs-msft_key] https://packages.microsoft.com/ubuntu/20.04/prod insiders-fast main"
+            },
+            "packages": []
+         }
+      },
+      "properties.desired.Configuration": {
+         "desiredRefreshInterval": 15,
+         "desiredIotHubProtocol": "mqtt"
+      }
+   }
+}
