@@ -1,9 +1,9 @@
 {
     "properties": {
-        "displayName": "SSH Posture Control",
+        "displayName": "[Preview] SSH Posture Control",
         "policyType": "Custom",
         "mode": "Indexed",
-        "description": "SSH Posture Control",
+        "description": "[Preview] SSH Posture Control",
         "metadata": {
             "category": "Guest Configuration",
             "version": "1.0.0.0",
@@ -491,5 +491,5 @@
             }
         }
     },
-    "name": "SSH Posture Control"
+    "name": "[Preview] SSH Posture Control"
 }
